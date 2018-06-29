@@ -4,6 +4,11 @@
 
 This is a simple project to help migrate Jira tickets to VSTS as workitems. Provide a list of JQL to be sync'd to VSTS, it will automatically find the Sprints and Epics associated with the issues and sync these too. _Note: Sub-tasks should be sync'd after the other issue-types are processed._
 
+## What does this fork change?
+Basically the original project is geared towards projects which use sprints (Scrum). We work more in a more Kanban fashion where we just continually pull from the backlog as needed and add them to our board. For a release, in Jira, we would create a 'release', and assign all the done tasks to it. Our board query removed items from the board that were done, and belonged to a 'release' that was released. VSTS actually works better for this, as every release gets it's own board. So when we do a release, we just create a new iteration and start working off that iterations board.
+
+So in my fork, I ignored the 'sprint' field, and created an iteration for every release/version in Jira and linked the work items added to that iteration. I also enhanced it a bit in the sense that I took the dates from each Jira release, and applied them to the iteration. I think I found a few other field too which you can see from my commits. Then I ran the tool. I ran it a number of times until I got it how I wanted it, as it does a proper upsert by matching issue title, so as long as you don't change the formula for work item title you can keep tweaking and running it.
+
 ## Required
 
 * Visual Studio 2017
